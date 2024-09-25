@@ -27,8 +27,12 @@
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Puesto</th>
+                        <th>Apellido</th>
+                        <th>Documento Identidad</th>
+                        <th>Direccion</th>
                         <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Foto</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
@@ -36,10 +40,14 @@
                 <tbody id="employeeTable">
                     <tr>
                         <td>1</td>
-                        <td>Juan Pérez</td>
-                        <td>Desarrollador</td>
-                        <td>juan@example.com</td>
-                        <td>Activo</td>
+                        <td>Pedro</td>
+                        <td>Linarez</td>
+                        <td>103666666</td>
+                        <td>calle 22b # 61-10</td>
+                        <td>Linarez@gmail.com</td>
+                        <td>3103020088</td>
+                        <td>IMG</td>
+                        <td>Inactivo</td>
                         <td>
                             <button class="btn-edit" onclick="openModal('editEmployeeModal')">Editar</button>
                             <button class="btn-delete">Eliminar</button>
@@ -47,9 +55,13 @@
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td>Maria González</td>
-                        <td>Diseñadora</td>
-                        <td>maria@example.com</td>
+                        <td>Maria</td>
+                        <td>Gutierrez</td>
+                        <td>589663254</td>
+                        <td>cra 30 # 25-08</td>
+                        <td>mariagut@gmail.com</td>
+                        <td>3115267841</td>
+                        <td>IMG</td>
                         <td>Activo</td>
                         <td>
                             <button class="btn-edit" onclick="openModal('editEmployeeModal')">Editar</button>
@@ -61,64 +73,96 @@
         </div>
     </div>
 
-    <!-- Modal de agregar empleado -->
-    <div id="addEmployeeModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('addEmployeeModal')">&times;</span>
-            <h2>Agregar Empleado</h2>
-            <form id="addEmployeeForm">
-                <div class="form-group">
-                    <label for="addName">Nombre Completo:</label>
-                    <input type="text" id="addName" placeholder="Ingresa el nombre completo">
-                </div>
-                <div class="form-group">
-                    <label for="addPosition">Puesto:</label>
-                    <input type="text" id="addPosition" placeholder="Ingresa el puesto">
-                </div>
-                <div class="form-group">
-                    <label for="addEmail">Correo Electrónico:</label>
-                    <input type="email" id="addEmail" placeholder="Ingresa el correo electrónico">
-                </div>
-                <div class="form-group">
-                    <label for="addStatus">Estado:</label>
-                    <select id="addStatus">
-                        <option value="activo">Activo</option>
-                        <option value="inactivo">Inactivo</option>
-                    </select>
-                </div>
-                <div class="form-actions">
-                    <button type="submit" class="btn-primary">Guardar</button>
-                    <button type="button" class="btn-secondary" onclick="closeModal('addEmployeeModal')">Cancelar</button>
-                </div>
-            </form>
-        </div>
+   <!-- Modal de agregar empleado -->
+<div id="addEmployeeModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('addEmployeeModal')">&times;</span>
+        <h2>Agregar Empleado</h2>
+        <form id="addEmployeeForm">
+            <div class="form-group">
+                <label for="addName">Nombre:</label>
+                <input type="text" id="addName" placeholder="Ingresa el nombre completo" required>
+            </div>
+            <div class="form-group">
+                <label for="addSurName">Apellido:</label>
+                <input type="text" id="addSurName" placeholder="Ingresa el apellido" required>
+            </div>
+            <div class="form-group">
+                <label for="addDocument">Documento Identidad:</label>
+                <input type="number" id="addDocument" placeholder="Ingresa el documento de identidad" required>
+            </div>
+            <div class="form-group">
+                <label for="addAddress">Dirección:</label>
+                <input type="text" id="addAddress" placeholder="Ingresa la dirección">
+            </div>
+            <div class="form-group">
+                <label for="addEmail">Correo Electrónico:</label>
+                <input type="email" id="addEmail" placeholder="Ingresa el correo electrónico" required>
+            </div>
+            <div class="form-group">
+                <label for="addTel">Teléfono:</label>
+                <input type="number" id="addTel" placeholder="Ingresa el teléfono">
+            </div>
+            <div class="form-group">
+                <label for="addFoto">Seleccionar Imagen:</label>
+                <input type="file" id="addFoto" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label for="addStatus">Estado:</label>
+                <select id="addStatus" required>
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                </select>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">Guardar</button>
+                <button type="button" class="btn-secondary" onclick="closeModal('addEmployeeModal')">Cancelar</button>
+            </div>
+        </form>
     </div>
+</div>
+
 
     <!-- Modal de editar empleado -->
     <div id="editEmployeeModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('editEmployeeModal')">&times;</span>
             <h2>Editar Empleado</h2>
-            <form id="editEmployeeForm">
-                <div class="form-group">
-                    <label for="editName">Nombre Completo:</label>
-                    <input type="text" id="editName" placeholder="Ingresa el nombre completo">
-                </div>
-                <div class="form-group">
-                    <label for="editPosition">Puesto:</label>
-                    <input type="text" id="editPosition" placeholder="Ingresa el puesto">
-                </div>
-                <div class="form-group">
-                    <label for="editEmail">Correo Electrónico:</label>
-                    <input type="email" id="editEmail" placeholder="Ingresa el correo electrónico">
-                </div>
-                <div class="form-group">
-                    <label for="editStatus">Estado:</label>
-                    <select id="editStatus">
-                        <option value="activo">Activo</option>
-                        <option value="inactivo">Inactivo</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label for="addName">Nombre:</label>
+                <input type="text" id="addName" placeholder="Ingresa el nombre completo" required>
+            </div>
+            <div class="form-group">
+                <label for="addSurName">Apellido:</label>
+                <input type="text" id="addSurName" placeholder="Ingresa el apellido" required>
+            </div>
+            <div class="form-group">
+                <label for="addDocument">Documento Identidad:</label>
+                <input type="number" id="addDocument" placeholder="Ingresa el documento de identidad" required>
+            </div>
+            <div class="form-group">
+                <label for="addAddress">Dirección:</label>
+                <input type="text" id="addAddress" placeholder="Ingresa la dirección">
+            </div>
+            <div class="form-group">
+                <label for="addEmail">Correo Electrónico:</label>
+                <input type="email" id="addEmail" placeholder="Ingresa el correo electrónico" required>
+            </div>
+            <div class="form-group">
+                <label for="addTel">Teléfono:</label>
+                <input type="number" id="addTel" placeholder="Ingresa el teléfono">
+            </div>
+            <div class="form-group">
+                <label for="addFoto">Seleccionar Imagen:</label>
+                <input type="file" id="addFoto" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label for="addStatus">Estado:</label>
+                <select id="addStatus" required>
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                </select>
+            </div>
                 <div class="form-actions">
                     <button type="submit" class="btn-primary">Guardar Cambios</button>
                     <button type="button" class="btn-secondary" onclick="closeModal('editEmployeeModal')">Cancelar</button>
