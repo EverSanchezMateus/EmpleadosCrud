@@ -8,11 +8,13 @@
 
 body {
     background-color: #f4f7fc;
-    padding: 20px;
+    padding: 15px;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: auto;
+    padding-left: 180px;
+    padding-right: 180px;
     margin: 0 auto;
 }
 
@@ -118,10 +120,10 @@ table tbody td {
 
 .modal-content {
     background-color: white;
-    margin: 15% auto;
+    margin: 5% auto;
     padding: 20px;
     border: 1px solid #ccc;
-    width: 60%;
+    width: 30%;
     border-radius: 8px;
 }
 
@@ -138,7 +140,7 @@ table tbody td {
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .form-group label {
