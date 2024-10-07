@@ -4,6 +4,7 @@ $username = "root";
 $password = "";
 $dbname = "sistema_empleados";
 
+
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
 

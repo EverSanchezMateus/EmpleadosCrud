@@ -1,6 +1,7 @@
 <?php
 include 'db.php'; // Conexión a la base de datos
 
+
 // Verificar si la solicitud es de tipo POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Recibir los datos del formulario
