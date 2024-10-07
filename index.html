@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD de Empleados con Modales</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -20,57 +21,29 @@
         <button class="btn-primary" onclick="openModal('addEmployeeModal')">Agregar Empleado</button>
 
         <!-- Tabla de empleados -->
-        <div class="table-container">
-            <h2 class="table-title">Lista de Empleados</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Documento Identidad</th>
-                        <th>Direccion</th>
-                        <th>Email</th>
-                        <th>Teléfono</th>
-                        <th>Foto</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="employeeTable">
-                    <tr>
-                        <td>1</td>
-                        <td>Pedro</td>
-                        <td>Linarez</td>
-                        <td>103666666</td>
-                        <td>calle 22b # 61-10</td>
-                        <td>Linarez@gmail.com</td>
-                        <td>3103020088</td>
-                        <td>IMG</td>
-                        <td>Inactivo</td>
-                        <td>
-                            <button class="btn-edit" onclick="openModal('editEmployeeModal')">Editar</button>
-                            <button class="btn-delete">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Maria</td>
-                        <td>Gutierrez</td>
-                        <td>589663254</td>
-                        <td>cra 30 # 25-08</td>
-                        <td>mariagut@gmail.com</td>
-                        <td>3115267841</td>
-                        <td>IMG</td>
-                        <td>Activo</td>
-                        <td>
-                            <button class="btn-edit" onclick="openModal('editEmployeeModal')">Editar</button>
-                            <button class="btn-delete">Eliminar</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                <!-- Tabla de empleados -->
+                <div class="table-container">
+                    <h2 class="table-title">Lista de Empleados</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Documento Identidad</th>
+                                <th>Dirección</th>
+                                <th>Email</th>
+                                <th>Teléfono</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeeTable">
+                            <!-- Aquí se cargará la lista de empleados -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
     </div>
 
    <!-- Modal de agregar empleado -->
@@ -124,57 +97,55 @@
 </div>
 
 
-
     <!-- Modal de editar empleado -->
-<div id="editEmployeeModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('editEmployeeModal')">&times;</span>
-        <h2>Editar Empleado</h2>
-        <form id="editEmployeeForm">
-            <div class="form-group">
-                <label for="editName">Nombre:</label>
-                <input type="text" id="editName" name="editName" placeholder="Ingresa el nombre completo" required>
-            </div>
-            <div class="form-group">
-                <label for="editSurName">Apellido:</label>
-                <input type="text" id="editSurName" name="editSurName" placeholder="Ingresa el apellido" required>
-            </div>
-            <div class="form-group">
-                <label for="editDocument">Documento Identidad:</label>
-                <input type="number" id="editDocument" name="editDocument" placeholder="Ingresa el documento de identidad" required>
-            </div>
-            <div class="form-group">
-                <label for="editAddress">Dirección:</label>
-                <input type="text" id="editAddress" name="editAddress" placeholder="Ingresa la dirección">
-            </div>
-            <div class="form-group">
-                <label for="editEmail">Correo Electrónico:</label>
-                <input type="email" id="editEmail" name="editEmail" placeholder="Ingresa el correo electrónico" required>
-            </div>
-            <div class="form-group">
-                <label for="editTel">Teléfono:</label>
-                <input type="number" id="editTel" name="editTel" placeholder="Ingresa el teléfono">
-            </div>
-            <div class="form-group">
-                <label for="editFoto">Seleccionar Imagen:</label>
-                <input type="file" id="editFoto" name="editFoto" accept="image/*">
-            </div>
-            <div class="form-group">
-                <label for="editStatus">Estado:</label>
-                <select id="editStatus" name="editStatus" required>
-                    <option value="activo">Activo</option>
-                    <option value="inactivo">Inactivo</option>
-                </select>
-            </div>
-            <div class="form-actions">
-                <button type="button" class="btn-primary" onclick="editarEmpleado(event)">Guardar Cambios</button>
-                <button type="button" class="btn-secondary" onclick="closeModal('editEmployeeModal')">Cancelar</button>
-            </div>
-        </form>
+    <div id="editEmployeeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('editEmployeeModal')">&times;</span>
+            <h2>Editar Empleado</h2>
+            <form id="editEmployeeForm">
+                <div class="form-group">
+                    <label for="editName">Nombre:</label>
+                    <input type="text" id="editName" name="editName" placeholder="Ingresa el nombre completo" required>
+                </div>
+                <div class="form-group">
+                    <label for="editSurName">Apellido:</label>
+                    <input type="text" id="editSurName" name="editSurName" placeholder="Ingresa el apellido" required>
+                </div>
+                <div class="form-group">
+                    <label for="editDocument">Documento Identidad:</label>
+                    <input type="number" id="editDocument" name="editDocument" placeholder="Ingresa el documento de identidad" required>
+                </div>
+                <div class="form-group">
+                    <label for="editAddress">Dirección:</label>
+                    <input type="text" id="editAddress" name="editAddress" placeholder="Ingresa la dirección">
+                </div>
+                <div class="form-group">
+                    <label for="editEmail">Correo Electrónico:</label>
+                    <input type="email" id="editEmail" name="editEmail" placeholder="Ingresa el correo electrónico" required>
+                </div>
+                <div class="form-group">
+                    <label for="editTel">Teléfono:</label>
+                    <input type="number" id="editTel" name="editTel" placeholder="Ingresa el teléfono">
+                </div>
+                <div class="form-group">
+                    <label for="editFoto">Seleccionar Imagen:</label>
+                    <input type="file" id="editFoto" name="editFoto" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label for="editStatus">Estado:</label>
+                    <select id="editStatus" name="editStatus" required>
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-primary" onclick="editarEmpleado(event)">Guardar Cambios</button>
+                    <button type="button" class="btn-secondary" onclick="closeModal('editEmployeeModal')">Cancelar</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-    <script src="script.js"></script>
-</body>
-</html>
-
+    
+        <script src="script.js"></script>
+    </body>
+    </html>
