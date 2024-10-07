@@ -74,3 +74,4 @@ function eliminar_empleado(codigo) {
         });
     }
 }
+
