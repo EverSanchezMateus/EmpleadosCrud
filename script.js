@@ -54,3 +54,23 @@ function agregarEmpleado(event) {
         console.error('Error:', error);
     });
 }
+
+function eliminar_empleado(codigo) {
+    if (confirm('¿Estás seguro de que deseas eliminar este empleado?')) {
+        fetch('eliminarEmpleado.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ codigo: codigo })  // Enviar el código del empleado a eliminar
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data);  // Mostrar el resultado
+            cargarEmpleados();  // Recargar la lista de empleados
+        })
+        .catch(error => {
+            console.error('Error eliminando empleado:', error);
+        });
+    }
+}
