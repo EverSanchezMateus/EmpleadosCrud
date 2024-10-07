@@ -123,53 +123,55 @@
 </div>
 
 
-    <!-- Modal de editar empleado -->
-    <div id="editEmployeeModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('editEmployeeModal')">&times;</span>
-            <h2>Editar Empleado</h2>
+  <!-- Modal de editar empleado -->
+<div id="editEmployeeModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('editEmployeeModal')">&times;</span>
+        <h2>Editar Empleado</h2>
+        <form id="editEmployeeForm">
             <div class="form-group">
-                <label for="addName">Nombre:</label>
-                <input type="text" id="addName" placeholder="Ingresa el nombre completo" required>
+                <label for="editName">Nombre:</label>
+                <input type="text" id="editName" name="editName" placeholder="Ingresa el nombre completo" required>
             </div>
             <div class="form-group">
-                <label for="addSurName">Apellido:</label>
-                <input type="text" id="addSurName" placeholder="Ingresa el apellido" required>
+                <label for="editSurName">Apellido:</label>
+                <input type="text" id="editSurName" name="editSurName" placeholder="Ingresa el apellido" required>
             </div>
             <div class="form-group">
-                <label for="addDocument">Documento Identidad:</label>
-                <input type="number" id="addDocument" placeholder="Ingresa el documento de identidad" required>
+                <label for="editDocument">Documento Identidad:</label>
+                <input type="number" id="editDocument" name="editDocument" placeholder="Ingresa el documento de identidad" required>
             </div>
             <div class="form-group">
-                <label for="addAddress">Dirección:</label>
-                <input type="text" id="addAddress" placeholder="Ingresa la dirección">
+                <label for="editAddress">Dirección:</label>
+                <input type="text" id="editAddress" name="editAddress" placeholder="Ingresa la dirección">
             </div>
             <div class="form-group">
-                <label for="addEmail">Correo Electrónico:</label>
-                <input type="email" id="addEmail" placeholder="Ingresa el correo electrónico" required>
+                <label for="editEmail">Correo Electrónico:</label>
+                <input type="email" id="editEmail" name="editEmail" placeholder="Ingresa el correo electrónico" required>
             </div>
             <div class="form-group">
-                <label for="addTel">Teléfono:</label>
-                <input type="number" id="addTel" placeholder="Ingresa el teléfono">
+                <label for="editTel">Teléfono:</label>
+                <input type="number" id="editTel" name="editTel" placeholder="Ingresa el teléfono">
             </div>
             <div class="form-group">
-                <label for="addFoto">Seleccionar Imagen:</label>
-                <input type="file" id="addFoto" accept="image/*">
+                <label for="editFoto">Seleccionar Imagen:</label>
+                <input type="file" id="editFoto" name="editFoto" accept="image/*">
             </div>
             <div class="form-group">
-                <label for="addStatus">Estado:</label>
-                <select id="addStatus" required>
+                <label for="editStatus">Estado:</label>
+                <select id="editStatus" name="editStatus" required>
                     <option value="activo">Activo</option>
                     <option value="inactivo">Inactivo</option>
                 </select>
             </div>
-                <div class="form-actions">
-                    <button type="submit" class="btn-primary">Guardar Cambios</button>
-                    <button type="button" class="btn-secondary" onclick="closeModal('editEmployeeModal')">Cancelar</button>
-                </div>
-            </form>
-        </div>
+            <div class="form-actions">
+                <button type="button" class="btn-primary" onclick="editarEmpleado(event)">Guardar Cambios</button>
+                <button type="button" class="btn-secondary" onclick="closeModal('editEmployeeModal')">Cancelar</button>
+            </div>
+        </form>
     </div>
+</div>
+
 
     <script src="script.js"></script>
 </body>

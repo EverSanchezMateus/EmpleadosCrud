@@ -36,7 +36,7 @@ def crear_base_de_datos():
             email VARCHAR(255),
             telefono BIGINT,
             foto LONGBLOB,
-            estado TINYINT(1) NOT NULL
+            estado VARCHAR(255), NOT NULL
                 
         )''')
 
