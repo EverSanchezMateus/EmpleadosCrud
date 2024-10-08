@@ -75,3 +75,74 @@ function eliminar_empleado(codigo) {
     }
 }
 
+// Función para obtener los datos del empleado y mostrar el formulario
+function cargarDatosEmpleado() {
+    const codigo = document.getElementById('codigo').value; // Obtener el código del empleado
+    
+    if (!codigo) {
+        alert("Por favor ingresa un código válido.");
+        return;
+    }
+
+    // Enviar el código al servidor para obtener los datos del empleado
+    fetch('obtenerEmpleado.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ codigo: codigo }) // Enviar el código en el cuerpo de la solicitud
+    })
+    .then(response => response.json())  // Obtener los datos en formato JSON
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+        } else {
+            // Rellenar el formulario de edición con los datos del empleado
+            document.getElementById('codigo-editar').value = codigo;
+            document.getElementById('nombre').value = data.nombre;
+            document.getElementById('apellido').value = data.apellido;
+            document.getElementById('documento_identidad').value = data.documento_identidad;
+            document.getElementById('direccion').value = data.direccion;
+            document.getElementById('email').value = data.email;
+            document.getElementById('telefono').value = data.telefono;
+            document.getElementById('estado').value = data.estado;
+
+            // Mostrar el formulario de edición
+            document.getElementById('editEmployeeForm').style.display = 'block';
+        }
+    })
+    .catch(error => {
+        console.error('Error al cargar los datos del empleado:', error);
+    });
+}
+
+// Función para editar el empleado con los datos modificados
+function editar() {
+    const empleado = {
+        codigo: document.getElementById('codigo-editar').value,
+        nombre: document.getElementById('nombre').value,
+        apellido: document.getElementById('apellido').value,
+        documento_identidad: document.getElementById('documento_identidad').value,
+        direccion: document.getElementById('direccion').value,
+        email: document.getElementById('email').value,
+        telefono: document.getElementById('telefono').value,
+        estado: document.getElementById('estado').value
+    };
+
+    // Enviar los datos modificados al servidor para actualizar el empleado
+    fetch('editar.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(empleado)  // Enviar los datos actualizados
+    })
+    .then(response => response.text())
+    .then(data => {
+        alert(data);  // Mostrar el mensaje de éxito o error
+        document.getElementById('editEmployeeForm').style.display = 'none'; // Ocultar el formulario de edición
+    })
+    .catch(error => {
+        console.error('Error al editar el empleado:', error);
+    });
+}
