@@ -13,8 +13,8 @@
 
         <!-- Formulario de búsqueda -->
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Buscar empleado..." onkeyup="searchEmployee()">
-            <button class="btn-primary" onclick="searchEmployee()">Buscar</button>
+            <input type="text" id="searchInput" placeholder="Buscar empleado" onkeyup="searchEmployee()">
+            <button class="btn-primary" onclick="cargarDatosEmpleado()">Buscar Empleado</button>
         </div>
 
         <!-- Botón para abrir modal de agregar empleado -->
@@ -103,6 +103,7 @@
     </div>
 </div>
 
+<button onclick="openModal('editEmployeeModal')">Editar</button>
 
     <!-- Modal de editar empleado -->
     <div id="editEmployeeModal" class="modal">
@@ -120,7 +121,7 @@
                 </div>
                 <div class="form-group">
                     <label for="editDocument">Documento Identidad:</label>
-                    <input type="number" id="editDocument" name="editDocument" placeholder="Ingresa el documento de identidad" required>
+                    <input type="number" id="editDocument" name="editDocument" placeholder="Ingresa el documento de identidad" readonly>
                 </div>
                 <div class="form-group">
                     <label for="editAddress">Dirección:</label>
