@@ -38,7 +38,14 @@
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody id="employeeTable">
+                        <tbody id="listaEmpleados">
+                            <script src="script.js"></script> <!-- Asegúrate de que el nombre del archivo JS sea correcto -->
+
+                            <!-- Ejecutar la función al cargar la página -->
+                            <script>
+                            // Ejecutar listarEmpleados cuando la página se cargue
+                            document.addEventListener('DOMContentLoaded', listarEmpleados);
+                            </script>
                             <!-- Aquí se cargará la lista de empleados -->
                         </tbody>
                     </table>
