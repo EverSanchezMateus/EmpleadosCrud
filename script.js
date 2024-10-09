@@ -20,7 +20,7 @@ function agregarEmpleado(event) {
     let email = document.getElementById("addEmail").value;
     let celular = document.getElementById("addTel").value;
     let fotoElement = document.getElementById("addFoto");
-  
+
     foto = fotoElement.files[0];
 
 
@@ -36,23 +36,23 @@ function agregarEmpleado(event) {
     if (foto) {
         datosFormulario.append("foto", foto);
     }
-  
+
     datosFormulario.append("estado", estado);
 
-    fetch('agregarEmpleado.php', { 
+    fetch('agregarEmpleado.php', {
         method: 'POST',
         body: datosFormulario
     })
-    .then(response => response.text())
-    .then(data => {
-        //document.querySelector('#addEmployeeModal form').reset(); // Limpiar el formulario después de agregar el empleado por si se agrega otro
-        //cerrarModal('addEmployeeModal');
-        alert(data)
-    })
-    
-    .catch(error => {
-        console.error('Error:', error);
-    });
+        .then(response => response.text())
+        .then(data => {
+            //document.querySelector('#addEmployeeModal form').reset(); // Limpiar el formulario después de agregar el empleado por si se agrega otro
+            //cerrarModal('addEmployeeModal');
+            alert(data)
+        })
+
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
 
 function eliminar_empleado(codigo) {
@@ -64,14 +64,39 @@ function eliminar_empleado(codigo) {
             },
             body: JSON.stringify({ codigo: codigo })  // Enviar el código del empleado a eliminar
         })
-        .then(response => response.text())
-        .then(data => {
-            alert(data);  // Mostrar el resultado
-            cargarEmpleados();  // Recargar la lista de empleados
-        })
-        .catch(error => {
-            console.error('Error eliminando empleado:', error);
-        });
+            .then(response => response.text())
+            .then(data => {
+                alert(data);  // Mostrar el resultado
+                cargarEmpleados();  // Recargar la lista de empleados
+            })
+            .catch(error => {
+                console.error('Error eliminando empleado:', error);
+            });
     }
+
 }
 
+// Función para buscar empleados
+function searchEmployee() {
+    // Obtener el valor del campo de búsqueda
+    const searchValue = document.getElementById('searchInput').value;
+
+    // Realizar una solicitud AJAX
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'BuscarEmpleado.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    // Manejar la respuesta
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Actualizar el cuerpo de la tabla con la respuesta del servidor
+            document.getElementById('employeeTable').innerHTML = xhr.responseText;
+        }
+    };
+
+    // Enviar la solicitud con el valor de búsqueda
+    xhr.send('search=' + encodeURIComponent(searchValue));
+}
+
+// Conectar la función de búsqueda al evento 'keyup' del input
+document.getElementById('searchInput').addEventListener('keyup', searchEmployee);

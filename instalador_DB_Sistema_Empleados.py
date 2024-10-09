@@ -10,7 +10,6 @@ def crear_base_de_datos():
         host="localhost"
     if user=="":
         user="root"
-    
 
     try:
         # Creo la conexión
