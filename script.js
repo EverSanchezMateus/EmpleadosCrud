@@ -1,4 +1,7 @@
-
+document.addEventListener("DOMContentLoaded",function(){
+    console.log("La Página esta intentado cargar los EMPLEADOS..");
+    listarEmpleados();
+});
 // Función para abrir un modal
 function openModal(modalId) {
     document.getElementById(modalId).style.display = 'block';
@@ -66,12 +69,47 @@ function eliminar_empleado(codigo) {
         })
         .then(response => response.text())
         .then(data => {
-            alert(data);  // Mostrar el resultado
-            cargarEmpleados();  // Recargar la lista de empleados
+            alert(data);  // muestra si el empelado fue Eliminado
+            listarEmpleados();  // Recargar la lista de empleados
         })
         .catch(error => {
             console.error('Error eliminando empleado:', error);
         });
     }
+}
+
+function listarEmpleados(){
+    fetch('listarEmpleados.php')
+        .then(response=>response.json())
+        .then(data=>{
+            console.log(data)
+            let listaEmpleados =document.getElementById('listaEmpleados');
+            listaEmpleados.innerHTML='';
+            
+            data.forEach(empleado => {
+                let fila = document.createElement('tr');
+                
+                fila.innerHTML = `
+                    <td>${empleado.codigo}</td>
+                    <td>${empleado.nombre}</td>
+                    <td>${empleado.apellido}</td>
+                    <td>${empleado.documento_identidad}</td>
+                    <td>${empleado.direccion}</td>
+                    <td>${empleado.email}</td>
+                    <td>${empleado.telefono}</td>
+                    <td>${empleado.estado}</td>
+                    
+                `;
+                
+                listaEmpleados.appendChild(fila);
+
+            });
+            console.log('Tabla de empleados actualizada');
+        })
+        .catch(error => {
+            console.error('Error al obtener los datos:', error);
+            let listaEmpleados = document.getElementById('listaEmpleados');
+            listaEmpleados.innerHTML = '<tr><td colspan="9">Error al cargar los datos de empleados.</td></tr>';
+        });
 }
 

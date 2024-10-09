@@ -1,15 +1,14 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "John0607.";
 $dbname = "sistema_empleados";
 
-
-// Crear conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    // Configurar el modo de error de PDO para que lance excepciones
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+    die("Conexión fallida: " . $e->getMessage());
 }
 ?>
