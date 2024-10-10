@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,16 +8,10 @@
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
     <div class="container">
         <h1 class="title">Gestión de Empleados</h1>
-
-        <div style="text-align: center;">
-            <button class="btn-primary" onclick="openModal('addEmployeeModal')">Add Employee</button> <!-- Añadir Empleado -->
-            <button class="btn-primary" onclick="openThead('employeeTable')">List Employees</button><!-- Listar Empleados -->
-            <button class="btn-primary" onclick="openModal('editEmployeeModal')">Update Employees</button><!-- Actualizar Empleado -->
-            <button class="btn-primary" onclick="openModal('eliminarEmpleado.php')">Delete Employee</button><!-- Eliminar Empleado -->
-        </div>
 
         <!-- Formulario de búsqueda -->
         <div class="search-container">
@@ -28,89 +23,90 @@
         <button class="btn-primary" onclick="openModal('addEmployeeModal')">Agregar Empleado</button>
 
         <!-- Tabla de empleados -->
-                <!-- Tabla de empleados -->
-                <div class="table-container">
-                    <h2 class="table-title">Lista de Empleados</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Código</th>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Documento Identidad</th>
-                                <th>Dirección</th>
-                                <th>Email</th>
-                                <th>Teléfono</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="listaEmpleados">
-                            <script src="script.js"></script> <!-- Asegúrate de que el nombre del archivo JS sea correcto -->
+        <div class="table-container">
+            <h2 class="table-title">Lista de Empleados</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Documento Identidad</th>
+                        <th>Dirección</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="listaEmpleados">
+                    <script src="script.js"></script> <!-- Asegúrate de que el nombre del archivo JS sea correcto -->
 
-                            <!-- Ejecutar la función al cargar la página -->
-                            <script>
-                            // Ejecutar listarEmpleados cuando la página se cargue
-                            document.addEventListener('DOMContentLoaded', listarEmpleados);
-                            </script>
-                            <!-- Aquí se cargará la lista de empleados -->
-                        </tbody>
-                    </table>
+                    <!-- Ejecutar la función al cargar la página -->
+                    <script>
+                        // Ejecutar listarEmpleados cuando la página se cargue
+                        document.addEventListener('DOMContentLoaded', listarEmpleados);
+                    </script>
+                    <!-- Aquí se cargará la lista de empleados -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+
+    <!-- Modal de agregar empleado -->
+    <div id="addEmployeeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addEmployeeModal')">&times;</span>
+            <h2>Agregar Empleado</h2>
+            <form id="addEmployeeForm">
+                <div class="form-group">
+                    <label for="addName">Nombre:</label>
+                    <input type="text" id="addName" name="addName" placeholder="Ingresa el nombre completo" required>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="addSurName">Apellido:</label>
+                    <input type="text" id="addSurName" name="addSurName" placeholder="Ingresa el apellido" required>
+                </div>
+                <div class="form-group">
+                    <label for="addDocument">Documento Identidad:</label>
+                    <input type="number" id="addDocument" name="addDocument"
+                        placeholder="Ingresa el documento de identidad" required>
+                </div>
+                <div class="form-group">
+                    <label for="addAddress">Dirección:</label>
+                    <input type="text" id="addAddress" name="addAddress" placeholder="Ingresa la dirección">
+                </div>
+                <div class="form-group">
+                    <label for="addEmail">Correo Electrónico:</label>
+                    <input type="email" id="addEmail" name="addEmail" placeholder="Ingresa el correo electrónico"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="addTel">Teléfono:</label>
+                    <input type="number" id="addTel" name="addTel" placeholder="Ingresa el teléfono">
+                </div>
+                <div class="form-group">
+                    <label for="addFoto">Seleccionar Imagen:</label>
+                    <input type="file" id="addFoto" name="addFoto" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    <label for="addStatus">Estado:</label>
+                    <select id="addStatus" name="addStatus" required>
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary" onclick="agregarEmpleado(event)">Guardar</button>
+                    <button type="button" class="btn-secondary"
+                        onclick="closeModal('addEmployeeModal')">Cancelar</button>
+                </div>
+            </form>
+        </div>
     </div>
 
-   <!-- Modal de agregar empleado -->
-<div id="addEmployeeModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('addEmployeeModal')">&times;</span>
-        <h2>Agregar Empleado</h2>
-        <form id="addEmployeeForm">
-            <div class="form-group">
-                <label for="addName">Nombre:</label>
-                <input type="text" id="addName" name="addName" placeholder="Ingresa el nombre completo" required>
-            </div>
-            <div class="form-group">
-                <label for="addSurName">Apellido:</label>
-                <input type="text" id="addSurName" name="addSurName" placeholder="Ingresa el apellido" required>
-            </div>
-            <div class="form-group">
-                <label for="addDocument">Documento Identidad:</label>
-                <input type="number" id="addDocument" name="addDocument" placeholder="Ingresa el documento de identidad" required>
-            </div>
-            <div class="form-group">
-                <label for="addAddress">Dirección:</label>
-                <input type="text" id="addAddress" name="addAddress" placeholder="Ingresa la dirección">
-            </div>
-            <div class="form-group">
-                <label for="addEmail">Correo Electrónico:</label>
-                <input type="email" id="addEmail" name="addEmail" placeholder="Ingresa el correo electrónico" required>
-            </div>
-            <div class="form-group">
-                <label for="addTel">Teléfono:</label>
-                <input type="number" id="addTel" name="addTel" placeholder="Ingresa el teléfono">
-            </div>
-            <div class="form-group">
-                <label for="addFoto">Seleccionar Imagen:</label>
-                <input type="file" id="addFoto" name="addFoto" accept="image/*">
-            </div>
-            
-            <div class="form-group">
-                <label for="addStatus">Estado:</label>
-                <select id="addStatus" name="addStatus" required>
-                    <option value="activo">Activo</option>
-                    <option value="inactivo">Inactivo</option>
-                </select>
-            </div>
-            <div class="form-actions">
-                <button type="submit" class="btn-primary" onclick="agregarEmpleado(event)">Guardar</button>
-                <button type="button" class="btn-secondary" onclick="closeModal('addEmployeeModal')">Cancelar</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<button onclick="openModal('editEmployeeModal')">Editar</button>
 
     <!-- Modal de editar empleado -->
     <div id="editEmployeeModal" class="modal">
@@ -128,7 +124,8 @@
                 </div>
                 <div class="form-group">
                     <label for="editDocument">Documento Identidad:</label>
-                    <input type="number" id="editDocument" name="editDocument" placeholder="Ingresa el documento de identidad" readonly>
+                    <input type="number" id="editDocument" name="editDocument"
+                        placeholder="Ingresa el documento de identidad" readonly>
                 </div>
                 <div class="form-group">
                     <label for="editAddress">Dirección:</label>
@@ -136,7 +133,8 @@
                 </div>
                 <div class="form-group">
                     <label for="editEmail">Correo Electrónico:</label>
-                    <input type="email" id="editEmail" name="editEmail" placeholder="Ingresa el correo electrónico" required>
+                    <input type="email" id="editEmail" name="editEmail" placeholder="Ingresa el correo electrónico"
+                        required>
                 </div>
                 <div class="form-group">
                     <label for="editTel">Teléfono:</label>
@@ -155,22 +153,12 @@
                 </div>
                 <div class="form-actions">
                     <button type="button" class="btn-primary" onclick="editarEmpleado(event)">Guardar Cambios</button>
-                    <button type="button" class="btn-secondary" onclick="closeModal('editEmployeeModal')">Cancelar</button>
+                    <button type="button" class="btn-secondary"
+                        onclick="closeModal('editEmployeeModal')">Cancelar</button>
                 </div>
             </form>
         </div>
-    </div>
-    <footer class="footer">
-        <div class="footer">
-            <h1>Grupo Colaborativo 204027_14</h1>
-            <ul>Paola Andrea Zabala Valencia</ul>
-            <ul>Monica Alejandra Sanchez Villalobos</ul>
-            <ul>Ever Sanchez Mateuz</ul>
-            <ul>Jhon Alexander Calentura Ruiz</ul> 
-            <ul>Fabio Andres Marquez Ortiz</ul>  
-        </div>
-    </footer>
-
         <script src="script.js"></script>
-    </body>
-    </html>
+</body>
+
+</html>

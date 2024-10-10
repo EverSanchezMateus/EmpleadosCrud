@@ -1,46 +1,55 @@
 <?php
-include 'db.php';
-$id = $_POST['id'];
+include 'db.php'; // Conexión a la base de datos
 
-// Verificar si se ha enviado el ID por POST
-if (isset($_POST['id'])) {
-    // Obtener el ID del empleado desde el formulario
-    $id = $_POST['id'];
+header('Content-Type: application/json');
 
-    // Crear una consulta SQL para buscar el empleado
-    $query = "SELECT * FROM empleados WHERE id = ?";
+$data = json_decode(file_get_contents('php://input'), true);
 
-    // Preparar la consulta
+// Verificar si se proporcionó el nombre o el documento de identidad
+if (isset($data['documento_identidad']) || isset($data['nombre'])) {
+    $documento_identidad = $data['documento_identidad'] ?? null;
+    $nombre = $data['nombre'] ?? null;
+
+    // Crear la consulta
+    $query = "SELECT * FROM empleados WHERE 1=1";
+    $params = [];
+
+    if ($documento_identidad) {
+        $query .= " AND documento_identidad = ?";
+        $params[] = $documento_identidad;
+    }
+    if ($nombre) {
+        $query .= " AND nombre LIKE ?";
+        $params[] = "%" . $nombre . "%";
+    }
+
+    // Preparar y ejecutar la consulta
     if ($stmt = $conn->prepare($query)) {
-        // Enlazar el parámetro
-        $stmt->bind_param("i", $id);
-
-        // Ejecutar la consulta
-        $stmt->execute();
-
-        // Obtener el resultado
-        $result = $stmt->get_result();
-
-        // Verificar si se encontró un empleado
-
-        if ($result->num_rows > 0) {
-            // Mostrar la información del empleado
-            $row = $result->fetch_assoc();
-            echo "Nombre: " . $row['nombre'] . "<br>";
-            echo "Apellido: " . $row['apellido'] . "<br>";
-            echo "Documento Identidad: " . $row['documento_identidad'] . "<br>";
-            echo "Dirección: " . $row['direccion'] . "<br>";
-            echo "Teléfono: " . $row['telefono'] . "<br>";
-            echo "Estado: " . $row['estado'] . "<br>";
-        } else {
-            // Si no se encontró ningún empleado con ese ID
-            echo "No se encontró ningún empleado con el ID proporcionado.";
+        if ($params) {
+            // Enlazar parámetros de forma dinámica
+            $stmt->bind_param(str_repeat("s", count($params)), ...$params);
         }
 
-        // Cerrar la consulta
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $empleados = [];
+        while ($row = $result->fetch_assoc()) {
+            $empleados[] = $row;
+        }
+
+        if (count($empleados) > 0) {
+            echo json_encode($empleados);
+        } else {
+            echo json_encode(['error' => 'No se encontraron empleados con los criterios proporcionados']);
+        }
+
         $stmt->close();
+    } else {
+        echo json_encode(['error' => 'Error al preparar la consulta']);
     }
+} else {
+    echo json_encode(['error' => 'No se proporcionó nombre ni documento de identidad']);
 }
 
-// Cerrar la conexión
 $conn->close();

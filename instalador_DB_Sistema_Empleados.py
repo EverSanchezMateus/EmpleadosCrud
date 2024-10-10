@@ -10,7 +10,6 @@ def crear_base_de_datos():
         host="localhost"
     if user=="":
         user="root"
-    
 
     try:
         # Creo la conexión
@@ -28,13 +27,13 @@ def crear_base_de_datos():
 
         # Ahora creo la tabla si no existe
         cursor.execute('''CREATE TABLE IF NOT EXISTS empleados (
-            codigo INT AUTO_INCREMENT PRIMARY KEY,
+            codigo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             nombre VARCHAR(100) NOT NULL,
             apellido VARCHAR(100) NOT NULL,
             documento_identidad BIGINT NOT NULL UNIQUE,
             direccion VARCHAR(255),
             email VARCHAR(255),
-            telefono BIGINT,
+            telefono BIGINT,SELECT codigo FROM empleados;
             foto LONGBLOB,
             estado VARCHAR(255) NOT NULL
                 

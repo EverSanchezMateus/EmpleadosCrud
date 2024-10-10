@@ -1,20 +1,32 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+include 'db.php'; // Asegúrate de que 'db.php' contiene la conexión a la base de datos usando mysqli
 
 header('Content-Type: application/json');
 
-try {
-    include 'db.php';
+// Preparar la consulta SQL para seleccionar todos los empleados
+$sql = "SELECT codigo, nombre, apellido, documento_identidad, direccion, email, telefono, estado FROM empleados";
 
-    $sql = "SELECT codigo, nombre, apellido, documento_identidad, direccion, email, telefono, foto, estado FROM empleados";
-    $stmt = $conn->prepare($sql);
+if ($stmt = $conn->prepare($sql)) {
+    // Ejecutar la consulta
     $stmt->execute();
 
-    $empleados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Obtener el resultado
+    $result = $stmt->get_result();
+    $empleados = [];
 
+    // Recorrer los resultados y guardarlos en un array
+    while ($row = $result->fetch_assoc()) {
+        $empleados[] = $row;
+    }
+
+    // Devolver los datos en formato JSON
     echo json_encode($empleados);
-} catch (PDOException $e) {
-    echo json_encode(['error' => $e->getMessage()]);
+
+    // Cerrar el statement
+    $stmt->close();
+} else {
+    echo json_encode(['error' => "Error al preparar la consulta: " . $conn->error]);
 }
-?>
+
+// Cerrar la conexión
+$conn->close();
