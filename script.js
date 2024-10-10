@@ -76,7 +76,7 @@ function eliminar_empleado(codigo) {
 }
 
 // Función para obtener los datos del empleado y mostrar el formulario
-function cargarDatosEmpleado() {
+function obtener() { 
     const codigo = document.getElementById('codigo').value; // Obtener el código del empleado
     
     if (!codigo) {
