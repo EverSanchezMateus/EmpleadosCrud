@@ -11,6 +11,13 @@
     <div class="container">
         <h1 class="title">Gestión de Empleados</h1>
 
+        <div style="text-align: center;">
+            <button class="btn-primary" onclick="openModal('addEmployeeModal')">Add Employee</button> <!-- Añadir Empleado -->
+            <button class="btn-primary" onclick="openThead('employeeTable')">List Employees</button><!-- Listar Empleados -->
+            <button class="btn-primary" onclick="openModal('editEmployeeModal')">Update Employees</button><!-- Actualizar Empleado -->
+            <button class="btn-primary" onclick="openModal('eliminarEmpleado.php')">Delete Employee</button><!-- Eliminar Empleado -->
+        </div>
+
         <!-- Formulario de búsqueda -->
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Buscar empleado" onkeyup="searchEmployee()">
@@ -146,7 +153,17 @@
             </form>
         </div>
     </div>
-    
+    <footer class="footer">
+        <div class="footer">
+            <h1>Grupo Colaborativo 204027_14</h1>
+            <ul>Paola Andrea Zabala Valencia</ul>
+            <ul>Monica Alejandra Sanchez Villalobos</ul>
+            <ul>Ever Sanchez Mateuz</ul>
+            <ul>Jhon Alexander Calentura Ruiz</ul> 
+            <ul>Fabio Andres Marquez Ortiz</ul>  
+        </div>
+    </footer>
+
         <script src="script.js"></script>
     </body>
     </html>
