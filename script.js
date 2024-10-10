@@ -85,7 +85,7 @@ function cargarDatosEmpleado() {
     }
 
     // Enviar el código al servidor para obtener los datos del empleado
-    fetch('obtenerEmpleado.php', {
+    fetch('obtener.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
