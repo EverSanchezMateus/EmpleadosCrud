@@ -16,7 +16,13 @@
         }
     
         $stmt->close();
+
     } 
+
+    } else {
+        echo "Código de empleado no proporcionado.";
+    }
+
     
     $conn->close();
     ?>

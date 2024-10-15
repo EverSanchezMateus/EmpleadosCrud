@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $apellido = $_POST['apellido'];
     $documento_identidad = $_POST['documento_identidad'];
     $direccion = $_POST['direccion'];
-    $email = $_POST['email'];  
+    $email = $_POST['email'];
     $telefono = $_POST['telefono'];
     $estado = $_POST['estado'];
 
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (isset($_FILES['foto']) && $_FILES['foto']['error'] == UPLOAD_ERR_OK) {
             // valido tipo d eimagen y tamaño
             $allowed_types = ['image/jpeg', 'image/png'];
-        
+
 
             if (in_array($_FILES['foto']['type'], $allowed_types)) {
                 $foto = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
@@ -28,22 +28,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 exit();
             }
         }
-    
 
-    $inyectar = $conn->prepare("INSERT INTO empleados (nombre, apellido, documento_identidad, direccion, email, telefono, foto, estado) 
+
+        $inyectar = $conn->prepare("INSERT INTO empleados (nombre, apellido, documento_identidad, direccion, email, telefono, foto, estado) 
                   VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
-    // Vincular parámetros
-    $inyectar->bind_param("ssisssss", $nombre, $apellido, $documento_identidad, $direccion, $email, $telefono, $foto, $estado);
-    if ($inyectar->execute()) {
-        echo $nombre, " - Ha sido agregado exitosamente.";
-    } else {
-        echo "Error: " . $inyectar->error;
-    }
+        // Vincular parámetros correctamente
+        $inyectar->bind_param("ssisssss", $nombre, $apellido, $documento_identidad, $direccion, $email, $telefono, $foto, $estado);
 
-    $inyectar->close();
+        // Ejecutar la inserción y verificar si es exitosa
+        if ($inyectar->execute()) {
+            echo $nombre . " - Ha sido agregado exitosamente.";
+        } else {
+            echo "Error al agregar empleado: " . $inyectar->error;
+        }
+
+        $inyectar->close();
+    } else {
+        echo "Faltan campos obligatorios.";
+    }
 } else {
-    echo "Ocurrio un error.";
+    echo "Solicitud no válida.";
 }
-}
-?>
+
+$conn->close();
