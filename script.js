@@ -259,3 +259,6 @@ function searchEmployee() {
         alert('Error al buscar el empleado.');
     });
 }
+function continuar(){
+    
+}
