@@ -3,174 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD de Empleados con Modales</title>
+    <title>Gestión de Empleados</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="estilosindex.css">
+
 </head>
 <body>
-    <div class="container">
-        <h1 class="title">Gestión de Empleados</h1>
-
-        <!-- Formulario de búsqueda -->
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Buscar empleado..." onkeyup="searchEmployee()">
-            <button class="btn-primary" onclick="searchEmployee()">Buscar</button>
-        </div>
-
-        <!-- Botón para abrir modal de agregar empleado -->
-        <button class="btn-primary" onclick="openModal('addEmployeeModal')">Agregar Empleado</button>
-
-        <!-- Tabla de empleados -->
-        <div class="table-container">
-            <h2 class="table-title">Lista de Empleados</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Documento Identidad</th>
-                        <th>Direccion</th>
-                        <th>Email</th>
-                        <th>Teléfono</th>
-                        <th>Foto</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="employeeTable">
-                    <tr>
-                        <td>1</td>
-                        <td>Pedro</td>
-                        <td>Linarez</td>
-                        <td>103666666</td>
-                        <td>calle 22b # 61-10</td>
-                        <td>Linarez@gmail.com</td>
-                        <td>3103020088</td>
-                        <td>IMG</td>
-                        <td>Inactivo</td>
-                        <td>
-                            <button class="btn-edit" onclick="openModal('editEmployeeModal')">Editar</button>
-                            <button class="btn-delete">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Maria</td>
-                        <td>Gutierrez</td>
-                        <td>589663254</td>
-                        <td>cra 30 # 25-08</td>
-                        <td>mariagut@gmail.com</td>
-                        <td>3115267841</td>
-                        <td>IMG</td>
-                        <td>Activo</td>
-                        <td>
-                            <button class="btn-edit" onclick="openModal('editEmployeeModal')">Editar</button>
-                            <button class="btn-delete">Eliminar</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <!-- Barra lateral -->
+    <div class="sidebar">
+        <h2>Menú</h2>
+        <a href="index.html">Inicio</a>
+        <a href="gestionEmpleados.html">Gestión de Empleados</a>
     </div>
 
-   <!-- Modal de agregar empleado -->
-<div id="addEmployeeModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('addEmployeeModal')">&times;</span>
-        <h2>Agregar Empleado</h2>
-        <form id="addEmployeeForm">
-            <div class="form-group">
-                <label for="addName">Nombre:</label>
-                <input type="text" id="addName" placeholder="Ingresa el nombre completo" required>
+    <div class="content">
+
+        <!-- Título principal -->
+        <div class="content-section">
+            <h1>Gestión de Empleados</h1>
+        </div>
+        <button class="btn-primary" onclick="openModal('connectionModal')">Crear Base de Datos</button>
+        <!-- Introducción -->
+        <div class="content-section">
+            <h2>Descripción General</h2>
+            <p>El sistema de Gestión de Empleados es una solución diseñada para manejar eficientemente los datos de los empleados y los procesos relacionados dentro de una organización. El sistema permite crear, actualizar, eliminar y ver información detallada sobre los empleados como nombre, ID, contacto, posición y departamento.</p>
+        </div>
+
+        <!-- Funcionalidades principales -->
+        <div class="content-section">
+            <h2>Funcionalidades Principales</h2>
+            <p>A continuación, se describen las principales funcionalidades implementadas en el sistema:</p>
+            <ul>
+                <li><strong>Crear empleados:</strong> Permite registrar un nuevo empleado y almacenar su información.</li>
+                <li><strong>Editar empleados:</strong> Permite actualizar la información básica del empleado.</li>
+                <li><strong>Eliminar empleados:</strong> Permite eliminar empleados del sistema.</li>
+                <li><strong>Listar empleados:</strong> Mantiene un registro visible de todos los empleados con detalles relevantes.</li>
+                <li><strong>Buscar empleados:</strong> Permite buscar empleados mediante su ID único.</li>
+            </ul>
+        </div>
+
+        <!-- Detalles sobre la entidad empleados -->
+        <div class="content-section">
+            <h2>Información Mínima Requerida</h2>
+            <p>Los siguientes campos son necesarios para gestionar a los empleados dentro del sistema:</p>
+            <ul>
+                <li>Código, Nombre, Apellido, Documento de Identidad, Dirección, Teléfono, Foto, Estado</li>
+
+            </ul>
+        </div>
+
+        <!-- Nota adicional -->
+        <div class="content-section">
+            <div class="note">
+                <strong>Nota:</strong> Estas funcionalidades se pueden replicar para otras entidades como vehículos, productos y juegos, manteniendo la consistencia en el sistema.
             </div>
-            <div class="form-group">
-                <label for="addSurName">Apellido:</label>
-                <input type="text" id="addSurName" placeholder="Ingresa el apellido" required>
-            </div>
-            <div class="form-group">
-                <label for="addDocument">Documento Identidad:</label>
-                <input type="number" id="addDocument" placeholder="Ingresa el documento de identidad" required>
-            </div>
-            <div class="form-group">
-                <label for="addAddress">Dirección:</label>
-                <input type="text" id="addAddress" placeholder="Ingresa la dirección">
-            </div>
-            <div class="form-group">
-                <label for="addEmail">Correo Electrónico:</label>
-                <input type="email" id="addEmail" placeholder="Ingresa el correo electrónico" required>
-            </div>
-            <div class="form-group">
-                <label for="addTel">Teléfono:</label>
-                <input type="number" id="addTel" placeholder="Ingresa el teléfono">
-            </div>
-            <div class="form-group">
-                <label for="addFoto">Seleccionar Imagen:</label>
-                <input type="file" id="addFoto" accept="image/*">
-            </div>
-            <div class="form-group">
-                <label for="addStatus">Estado:</label>
-                <select id="addStatus" required>
-                    <option value="activo">Activo</option>
-                    <option value="inactivo">Inactivo</option>
-                </select>
-            </div>
-            <div class="form-actions">
-                <button type="submit" class="btn-primary" onclick="agregarEmpleado()">Guardar</button>
-                <button type="button" class="btn-secondary" onclick="closeModal('addEmployeeModal')">Cancelar</button>
-            </div>
-        </form>
+        </div>
+
+        <!-- Pasos a seguir -->
+        <div class="content-section">
+            <h2>Pasos para la Implementación</h2>
+            <ul>
+                <li>Crear, editar, eliminar, buscar y listar empleados.</li>
+                <li>Desarrollar un formulario para agregar nuevos empleados con los campos necesarios.</li>
+                <li>Implementar la funcionalidad de búsqueda por código o documento de identidad.</li>
+            </ul>
+        </div>
+
+        <div class="content-section" style="text-align: center">
+            <h2>Integrantes del Grupo</h2>
+            <ul>
+                <li>Ever Sánchez Mateus</li>
+                <li>Paola Andrea Zabala Valencia</li>
+                <li>Fabio Andrés Márquez Ortiz</li>
+                <li>Mónica Alejandra Sánchez Villalobos</li>
+                <li>Jhon Alexander Calentura Ruiz</li>
+            </ul>
+        </div>
     </div>
-</div>
-
-
-    <!-- Modal de editar empleado -->
-    <div id="editEmployeeModal" class="modal">
+    <div id="connectionModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal('editEmployeeModal')">&times;</span>
-            <h2>Editar Empleado</h2>
-            <div class="form-group">
-                <label for="addName">Nombre:</label>
-                <input type="text" id="addName" placeholder="Ingresa el nombre completo" required>
-            </div>
-            <div class="form-group">
-                <label for="addSurName">Apellido:</label>
-                <input type="text" id="addSurName" placeholder="Ingresa el apellido" required>
-            </div>
-            <div class="form-group">
-                <label for="addDocument">Documento Identidad:</label>
-                <input type="number" id="addDocument" placeholder="Ingresa el documento de identidad" required>
-            </div>
-            <div class="form-group">
-                <label for="addAddress">Dirección:</label>
-                <input type="text" id="addAddress" placeholder="Ingresa la dirección">
-            </div>
-            <div class="form-group">
-                <label for="addEmail">Correo Electrónico:</label>
-                <input type="email" id="addEmail" placeholder="Ingresa el correo electrónico" required>
-            </div>
-            <div class="form-group">
-                <label for="addTel">Teléfono:</label>
-                <input type="number" id="addTel" placeholder="Ingresa el teléfono">
-            </div>
-            <div class="form-group">
-                <label for="addFoto">Seleccionar Imagen:</label>
-                <input type="file" id="addFoto" accept="image/*">
-            </div>
-            <div class="form-group">
-                <label for="addStatus">Estado:</label>
-                <select id="addStatus" required>
-                    <option value="activo">Activo</option>
-                    <option value="inactivo">Inactivo</option>
-                </select>
-            </div>
+            <span class="close" onclick="closeModal('connectionModal')">&times;</span>
+            <h2>Configurar Conexión a la Base de Datos</h2>
+            <form id="connectionForm">
+                <div class="form-group">
+                    <label for="servername">Servidor:</label>
+                    <input type="text" id="servername" name="servername" placeholder="Nombre del servidor" required>
+                </div>
+                <div class="form-group">
+                    <label for="username">Usuario:</label>
+                    <input type="text" id="username" name="username" placeholder="Nombre de usuario" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" placeholder="Contraseña" required>
+                </div>
                 <div class="form-actions">
-                    <button type="submit" class="btn-primary">Guardar Cambios</button>
-                    <button type="button" class="btn-secondary" onclick="closeModal('editEmployeeModal')">Cancelar</button>
+                    <button type="button" onclick="crearBaseDatos()">Crear Base de Datos</button>
+                    <button type="button" class="btn-secondary" onclick="closeModal('connectionModal')">Cancelar</button>
                 </div>
             </form>
         </div>
     </div>
+ 
 
-    <script src="script.js"></script>
 </body>
+
 </html>
