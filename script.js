@@ -47,8 +47,8 @@ function agregarEmpleado(event) {
     })
     .then(response => response.text())
     .then(data => {
-        //document.querySelector('#addEmployeeModal form').reset(); // Limpiar el formulario después de agregar el empleado por si se agrega otro
-        //cerrarModal('addEmployeeModal');
+        document.querySelector('#addEmployeeModal form').reset(); // Limpiar el formulario después de agregar el empleado por si se agrega otro
+        cerrarModal('addEmployeeModal');
         alert(data)
     })
     
@@ -259,6 +259,35 @@ function searchEmployee() {
         alert('Error al buscar el empleado.');
     });
 }
-function continuar(){
-    
+function crearBaseDatos() {
+    // Obtener los valores de los inputs del formulario
+    let servername = document.getElementById('servername').value;
+    let username = document.getElementById('username').value;
+    let password = document.getElementById('password').value;
+
+    // Validar que se hayan ingresado los datos necesarios
+    if (!servername || !username ) {
+        alert("Por favor, completa todos los campos para crear la base de datos.");
+        return;
+    }
+
+    // Crear un objeto FormData para enviar los datos al servidor
+    let datosFormulario = new FormData();
+    datosFormulario.append('servername', servername);
+    datosFormulario.append('username', username);
+    datosFormulario.append('password', password);
+
+    // Enviar la solicitud al servidor utilizando fetch
+    fetch('crearBaseDatos.php', {
+        method: 'POST',
+        body: datosFormulario
+    })
+    .then(response => response.text())  // Manejar la respuesta del servidor como texto
+    .then(data => {
+        cerrarModal('connectionModal');
+        alert(data);  // Mostrar el resultado del servidor en un alert
+    })
+    .catch(error => {
+        console.error('Error al crear la base de datos:', error);
+    });
 }
