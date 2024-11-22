@@ -47,8 +47,8 @@ function agregarEmpleado(event) {
     })
     .then(response => response.text())
     .then(data => {
-        document.querySelector('#addEmployeeModal form').reset(); // Limpiar el formulario después de agregar el empleado por si se agrega otro
-        cerrarModal('addEmployeeModal');
+        closeModal('addEmployeeModal'); // Cerrar el modal
+        cargarEmpleados(); // Recargar la lista de empleados
         alert(data)
     })
     
