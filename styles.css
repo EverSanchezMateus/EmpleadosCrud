@@ -247,3 +247,6 @@ table tbody td {
     margin-left: 250px; /* Ajustar el margen izquierdo para compensar la barra lateral */
     padding-left: 30px;
 }
+#addEmployeeModal {
+    display: none;
+}
